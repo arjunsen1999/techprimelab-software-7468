@@ -1,0 +1,23 @@
+.container {
+  position: relative;
+}
+.container::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 3px;
+  height: 100%;
+  border-radius: 4px 0px 0px 4px;
+  background-color: aqua;
+}
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  width: 3px;
+  height: 100%;
+  border-radius: 4px 0px 0px 4px;
+  background-color: aquamarine;
+}
