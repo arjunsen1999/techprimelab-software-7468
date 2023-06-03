@@ -9,30 +9,33 @@ export default function Header({ heading, icone }) {
       <Box
         backgroundImage={"./Header-bg.svg"}
         w="100%"
-        h="150px"
+        h={{base :"80px", md:"154px"}}
         backgroundRepeat={"no-repeat"}
-        backgroundPosition={"center"}
+        backgroundPosition={{base:"center", md : "center"}}
+        backgroundSize={{base:"cover", md:"cover"}}
         position={"relative"}
+        borderRadius={{base:"0px 0px 0px 30px", md: "0"}}
       >
         <Box
           position={"absolute"}
-          top={"38%"}
+          top={{base:"37px", md: "38%"}}
           left={"30px"}
           transform={"translate(8px,-50%)"}
+       
         >
           <Link to="/">
             <Box
               display={"flex"}
               alignItems={"center"}
               justifyContent={"flex-start"}
-              gap={"25px"}
+              gap={{base:"20px", md:"25px"}}
             >
               {icone ? (
                 <MdArrowBackIosNew fontSize={"16px"} color="white" />
               ) : (
                 ""
               )}
-              <Text color={"white"} fontSize={"24px"} fontWeight={700}>
+              <Text color={"white"} fontSize={{base:"20px", md:"24px"}} fontWeight={700}>
                 {heading}
               </Text>
             </Box>
@@ -44,6 +47,7 @@ export default function Header({ heading, icone }) {
           top={"38%"}
           left={"50%"}
           transform={"translate(-50%,-50%)"}
+          display={{base:"none", md : "block"}}
         >
           <Image src="./Logo.svg" w="60px" />
         </Box>

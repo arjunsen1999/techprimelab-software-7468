@@ -2,22 +2,31 @@ import { Box, Image } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function SideBar({ dashboard, projectList, createProject }) {
+export default function BottomBar({ dashboard, projectList, createProject }) {
   return (
     <>
-      <Box minH="100vh" position={"relative"} display={{base:"none", md : "block"}} >
+      <Box
+        // mt={"20px"}
+
+        position={"relative"}
+        h="50px"
+        display={{ base: "block", md: "none" }}
+        bg="white"
+        // border={"1px solid red"}
+        borderRadius={"20px"}
+      >
         <Box
-          w="50px"
-          h="100vh"
-          position={"fixed"}
-          top={"0px"}
+          w="100%"
+          h="50px"
+          position={"absolute"}
+          bottom={"0px"}
           left="0px"
           display={"flex"}
-          flexDirection={"column"}
-          alignItems={"flex-start"}
+          alignItems={"center"}
           justifyContent={"center"}
           gap={"30px"}
           // display={{base:"none", md : "block"}}
+          //   borderRadius={"60px"}
         >
           <Link to="/">
             <Box
@@ -30,17 +39,6 @@ export default function SideBar({ dashboard, projectList, createProject }) {
               <Image src={dashboard} />
             </Box>
           </Link>
-          <Link to="/project-list">
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              justifyContent={"center"}
-              w="40px"
-              h="40px"
-            >
-              <Image src={projectList} />
-            </Box>
-          </Link>
           <Link to="/create-project">
             <Box
               display={"flex"}
@@ -50,6 +48,17 @@ export default function SideBar({ dashboard, projectList, createProject }) {
               h="40px"
             >
               <Image src={createProject} />
+            </Box>
+          </Link>
+          <Link to="/project-list">
+            <Box
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              w="40px"
+              h="40px"
+            >
+              <Image src={projectList} />
             </Box>
           </Link>
         </Box>
