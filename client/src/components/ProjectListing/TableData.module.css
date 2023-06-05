@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+}
+.container > thead {
+  width: 100%;
+  background-color: #ebf5ff;
+}
+.container > thead > tr > th {
+  padding: 8px 10px;
+  text-align: left;
+  color: #4a4a4b;
+  font-size: 14px;
+}
+.tbodyTr {
+  width: 100%;
+  border-bottom-width: 1px;
+  padding: 0px 20px;
+}
+.tbodyTr > td {
+  padding: 10px 10px;
+  text-align: left;
+  color:gray;
+  font-size: 14px;
+}
+.tbodyTr > td:last-child{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  
+}
+.tbodyTr > td:first-child{
+    max-width: 500px;
+}
+.tbodyTr > td:first-child > p:first-child{
+    font-weight: bold;
+    font-size: 17px;
+    color: #414950;
+}

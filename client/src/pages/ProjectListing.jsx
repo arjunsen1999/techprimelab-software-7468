@@ -4,6 +4,7 @@ import SideBar from "../components/Navbar/SideBar";
 import Header from "../components/Header/Header";
 import ProjectListingBox from "../components/ProjectListing/ProjectListingBox";
 import BottomBar from "../components/Navbar/BottomBar";
+import Pagination from "../components/ProjectListing/Pagination";
 
 export default function ProjectListing() {
   return (
@@ -28,6 +29,7 @@ export default function ProjectListing() {
               <ProjectListingBox />
             </Box>
           </Box>
+          <Pagination />
           {/* End */}
           <BottomBar
             dashboard={"./Dashboard.svg"}

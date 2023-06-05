@@ -10,6 +10,7 @@ import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import Card from "./Card";
 import SortDrawer from "./SortDrawer";
+import TableData from "./TableData";
 
 export default function ProjectListingBox() {
   return (
@@ -17,7 +18,7 @@ export default function ProjectListingBox() {
       <Box
         bg={{ base: "transparent", md: "white" }}
         w="100%"
-        minH={"100vh"}
+        minH={"20vh"}
         boxShadow={"#F3F5F7 0px 13px 8px -5px, #F3F5F7 0px 8px 8px -8px"}
         borderRadius={"12px"}
         p={{base : "0px", md: "20px"}}
@@ -64,9 +65,10 @@ export default function ProjectListingBox() {
         </Box>
         {/* <>Main</> */}
         <Box
-          border={"1px solid red"}
           display={{ base: "none", md: "block" }}
-        ></Box>
+        >
+          <TableData />
+        </Box>
         <Box  display={{ base: "block", md: "none" }}>
           <Box display={"grid"} gridTemplateColumns={{base : "1fr", sm : "1fr 1fr"}} gap={"10px"}>
             <Card />
