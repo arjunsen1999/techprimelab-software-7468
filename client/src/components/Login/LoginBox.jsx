@@ -6,12 +6,20 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/auth/Auth.action";
+import notification from "../../Toast";
+import { user_login_reset } from "../../redux/auth/Auth.actionTypes";
 
 export default function LoginBox() {
+  const { User_isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -42,7 +50,7 @@ export default function LoginBox() {
         };
       });
       return;
-    }else{
+    } else {
       setFormError((prev) => {
         return {
           ...prev,
@@ -58,7 +66,7 @@ export default function LoginBox() {
         };
       });
       return;
-    }else{
+    } else {
       setFormError((prev) => {
         return {
           ...prev,
@@ -66,9 +74,19 @@ export default function LoginBox() {
         };
       });
     }
-
+    dispatch(login(formData));
     // navigate("/");
   };
+  // console.log(process.env.REACT_APP_API)
+  useEffect(() => {
+
+    // For Success
+    if (isSuccess) {
+      navigate("/");
+    }
+
+    dispatch({ type: user_login_reset });
+  }, [ isSuccess]);
   return (
     <>
       <Box
@@ -133,7 +151,7 @@ export default function LoginBox() {
                       value={formData.password}
                     />
                     <InputRightElement cursor={"pointer"} onClick={handleClick}>
-                      {show? <BsEye /> : <BsEyeSlash />}
+                      {show ? <BsEye /> : <BsEyeSlash />}
                     </InputRightElement>
                   </InputGroup>
                   <FormErrorMessage>Password is required.</FormErrorMessage>

@@ -9,11 +9,18 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import notification from "../../Toast";
+import { useDispatch, useSelector } from "react-redux";
+import { user_login_reset } from "../../redux/auth/Auth.actionTypes";
 
 export default function BottomLoginBox() {
+  const { User_isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -71,6 +78,14 @@ export default function BottomLoginBox() {
 
     // navigate("/");
   };
+  useEffect(() => {
+    // For Success
+    if (isSuccess) {
+      navigate("/");
+    }
+
+    dispatch({ type: user_login_reset });
+  }, [isSuccess]);
   return (
     <>
       <Box w="100%" mt="40px" px="20px" display={{ base: "block", sm: "none" }}>
@@ -89,7 +104,7 @@ export default function BottomLoginBox() {
           {/* Heading end */}
 
           {/* Form start */}
-          <form action="" >
+          <form action="">
             <Box mb="30px">
               <FormControl isInvalid={formError.email}>
                 <FormLabel fontSize={"15px"} color={"#9C9C9C"}>
