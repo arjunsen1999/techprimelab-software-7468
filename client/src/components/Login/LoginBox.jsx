@@ -6,17 +6,68 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-
 export default function LoginBox() {
   const navigate = useNavigate();
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [formError, setFormError] = useState({
+    email: false,
+    password: false,
+  });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/")
+    if (formData.email === "") {
+      setFormError((prev) => {
+        return {
+          ...prev,
+          email: true,
+        };
+      });
+      return;
+    }else{
+      setFormError((prev) => {
+        return {
+          ...prev,
+          email: false,
+        };
+      });
+    }
+    if (formData.password === "") {
+      setFormError((prev) => {
+        return {
+          ...prev,
+          password: true,
+        };
+      });
+      return;
+    }else{
+      setFormError((prev) => {
+        return {
+          ...prev,
+          password: false,
+        };
+      });
+    }
+
+    // navigate("/");
   };
   return (
     <>
@@ -55,24 +106,34 @@ export default function LoginBox() {
             {/* Form start */}
             <form action="" onSubmit={handleSubmit}>
               <Box mb="30px">
-                <FormControl>
+                <FormControl isInvalid={formError.email}>
                   <FormLabel fontSize={"15px"} color={"#9C9C9C"}>
                     Email
                   </FormLabel>
-                  <Input type="email" />
+                  <Input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
                   <FormErrorMessage>Email is required.</FormErrorMessage>
                 </FormControl>
               </Box>
 
               <Box mb="5px">
-                <FormControl>
+                <FormControl isInvalid={formError.password}>
                   <FormLabel fontSize={"15px"} color={"#9C9C9C"}>
                     Password
                   </FormLabel>
                   <InputGroup>
-                    <Input type="password" />
-                    <InputRightElement cursor={"pointer"}>
-                      <BsEyeSlash />
+                    <Input
+                      type={show ? "text" : "password"}
+                      name="password"
+                      onChange={handleChange}
+                      value={formData.password}
+                    />
+                    <InputRightElement cursor={"pointer"} onClick={handleClick}>
+                      {show? <BsEye /> : <BsEyeSlash />}
                     </InputRightElement>
                   </InputGroup>
                   <FormErrorMessage>Password is required.</FormErrorMessage>
