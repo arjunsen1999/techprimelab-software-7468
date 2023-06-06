@@ -9,8 +9,15 @@ import {
 import React from "react";
 import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+
 
 export default function LoginBox() {
+  const navigate = useNavigate();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    navigate("/")
+  };
   return (
     <>
       <Box
@@ -46,7 +53,7 @@ export default function LoginBox() {
             {/* Heading end */}
 
             {/* Form start */}
-            <form action="">
+            <form action="" onSubmit={handleSubmit}>
               <Box mb="30px">
                 <FormControl>
                   <FormLabel fontSize={"15px"} color={"#9C9C9C"}>
