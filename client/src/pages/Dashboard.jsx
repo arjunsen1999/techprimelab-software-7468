@@ -4,6 +4,7 @@ import { Box, Heading } from "@chakra-ui/react";
 import Header from "../components/Header/Header";
 import BottomBar from "../components/Navbar/BottomBar";
 import Card from "../components/Dashboard/Card";
+import ChartBox from "../components/Dashboard/ChartBox";
 
 export default function Dashboard() {
   return (
@@ -37,6 +38,8 @@ export default function Dashboard() {
               >
                 <Card number={8} title={"Total Projects"} />
                 <Card number={3} title={"Close"} />
+                <Card number={3} title={"Running"} />
+                <Card number={2} title={"Closure Delay"} />
               </Box>
 
               <Box>
@@ -51,9 +54,10 @@ export default function Dashboard() {
                     w="650px"
                     borderRadius={"20px"}
                     minH={"350px"}
-                    p="30px 20px"
+                    p="50px 20px 30px"
                   >
                     {/* Code here */}
+                    <ChartBox />
                   </Box>
                 </Box>
               </Box>
