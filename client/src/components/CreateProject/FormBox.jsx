@@ -1,8 +1,12 @@
 import { Box, Input, Select, Text, Textarea } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { create_project } from "../../redux/project/Project.action";
 
 export default function FormBox() {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     project_name: "",
     reason: "",
@@ -27,6 +31,7 @@ export default function FormBox() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
+    dispatch(create_project(formData))
   };
   return (
     <>

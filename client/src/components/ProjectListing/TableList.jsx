@@ -1,23 +1,44 @@
 import React from "react";
 import style from "./TableData.module.css";
 import { Button } from "@chakra-ui/react";
+import { update_status } from "../../redux/project/Project.action";
+import { useDispatch } from "react-redux";
 
-export default function TableList() {
+export default function TableList({
+  project_name,
+  reason,
+  type,
+  division,
+  category,
+  dept,
+  location,
+  status,
+  priority,
+  start_date,
+  end_date,
+  _id,
+}) {
+  const dispatch = useDispatch();
+  const handleUpdate = (status, id) => {
+    dispatch(update_status(status, id));
+  };
   return (
     <>
       <tr className={style.tbodyTr}>
         <td>
-            <p>Lorem, ipsumt</p>
-            <p>Lorem ipsum dolor sit amet. ksj ssss</p>
+          <p>{project_name}</p>
+          <p>
+            {start_date} to {end_date}
+          </p>
         </td>
-        <td>Bussiness</td>
-        <td>Bussiness</td>
-        <td>Bussiness</td>
-        <td>Bussiness</td>
-        <td>Bussiness</td>
-        <td>Bussiness</td>
-        <td>Bussiness</td>
-        <td>Bussiness</td>
+        <td>{reason}</td>
+        <td>{type}</td>
+        <td>{division}</td>
+        <td>{category}</td>
+        <td>{priority}</td>
+        <td>{dept}</td>
+        <td>{location}</td>
+        <td className={style.bold}>{status}</td>
         <td>
           <Button
             bg="#025AAB"
@@ -25,6 +46,7 @@ export default function TableList() {
             variant="solid"
             borderRadius={"20px"}
             h="28px"
+            onClick={() => handleUpdate("Running", _id)}
           >
             Start
           </Button>
@@ -35,6 +57,7 @@ export default function TableList() {
             variant="outline"
             borderRadius={"20px"}
             h="28px"
+            onClick={() => handleUpdate("Closed", _id)}
           >
             Close
           </Button>
@@ -45,6 +68,7 @@ export default function TableList() {
             variant="outline"
             borderRadius={"20px"}
             h="28px"
+            onClick={() => handleUpdate("Cancelled", _id)}
           >
             Cancel
           </Button>

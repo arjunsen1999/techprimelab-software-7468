@@ -43,12 +43,12 @@ const projectSchema = new mongoose.Schema(
       trim: true,
     },
     start_date: {
-      type: Date,
+      type: String,
       required: true,
       trim: true,
     },
     end_date: {
-      type: Date,
+      type: String,
       required: true,
       trim: true,
     },
@@ -67,5 +67,5 @@ const projectSchema = new mongoose.Schema(
 const Project_model = mongoose.model("project", projectSchema);
 
 module.exports = {
-    Project_model,
+  Project_model,
 };

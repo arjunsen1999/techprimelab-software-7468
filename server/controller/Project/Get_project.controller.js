@@ -5,10 +5,24 @@ const Get_project_controller = async (req, res) => {
   const match = ["limit", "page", "sort"];
   match.forEach((ele) => delete query[ele]);
   try {
-    let project = Project_model.find();
+    const search_query = {};
+    if (query.search) {
+      search_query[`$or`] = [
+        { project_name: { $regex: query.search, $options: "i" } },
+        { status: { $regex: query.search, $options: "i" } },
+        { reason: { $regex: query.search, $options: "i" } },
+        { priority: { $regex: query.search, $options: "i" } },
+      ];
+    }
+    let project = Project_model.find(search_query);
+
+    // Sort the data
+    if (req.query.sort) {
+      project = project.sort(`-${req.query.sort}`);
+    }
 
     // Pegination
-    const limit = req.query.limit || 10;
+    const limit = req.query.limit || 6;
     const page = req.query.page || 1;
     const skip = (page - 1) * limit;
     project = project.skip(skip).limit(limit);

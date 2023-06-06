@@ -23,8 +23,12 @@
   font-size: 14px;
 }
 .tbodyTr > td:last-child{
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 10px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
   
 }
@@ -35,4 +39,7 @@
     font-weight: bold;
     font-size: 17px;
     color: #414950;
+}
+.bold{
+  font-weight: bold;
 }
