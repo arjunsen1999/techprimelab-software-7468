@@ -4,7 +4,6 @@ import { Navigate } from "react-router-dom";
 
 export default function MakePrivate({ children }) {
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
   if (!user) {
     return <Navigate to="/login" />;
   }
