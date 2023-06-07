@@ -3,3 +3,7 @@ export const project_reset = "project/reset";
 export const project_isSuccess = "project/isSuccess";
 export const project_isError = "project/isError";
 export const project_get_data = "project/gat/data";
+export const project_search = "project/search";
+export const project_filter = "project/filter";
+export const project_page = "project/page";
+export const project_total_page = "project/total/page";

@@ -7,8 +7,27 @@ import {
   OrderedList,
   UnorderedList,
 } from "@chakra-ui/react";
+import { update_status } from "../../redux/project/Project.action";
+import { useDispatch } from "react-redux";
 
-export default function Card() {
+export default function Card({
+  project_name,
+  reason,
+  type,
+  division,
+  category,
+  dept,
+  location,
+  status,
+  priority,
+  start_date,
+  end_date,
+  _id,
+}) {
+  const dispatch = useDispatch();
+  const handleUpdate = (status, id) => {
+    dispatch(update_status(status, id));
+  };
   return (
     <>
       <Box bg={"white"} minH={"100px"} borderRadius={"12px"} p="20px">
@@ -19,22 +38,22 @@ export default function Card() {
           gap={"20px"}
         >
           <Box maxW={"60%"}>
-            <Text fontWeight={"500"}>Running Running Running </Text>
+            <Text fontWeight={"500"}>{project_name}</Text>
           </Box>
           <Box>
-            <Text fontWeight={"500"}>Running</Text>
+            <Text fontWeight={"500"}>{status}</Text>
           </Box>
         </Box>
         <Box mb="20px">
           <Text fontSize={"15px"} color={"gray"}>
-            jun jshj shjhsj
+            {start_date} to {end_date}
           </Text>
         </Box>
         <Box mb="20px">
-          <Text fontSize={{base : "12px", sm : "14px"}} color={"gray"} mb="0px">
+          <Text fontSize={{ base: "12px", sm: "14px" }} color={"gray"} mb="0px">
             Reason:{" "}
             <span style={{ fontWeight: "500", fontSize: "14px" }}>
-              Bussiness
+              {reason}
             </span>
           </Text>
           <Box
@@ -44,18 +63,18 @@ export default function Card() {
             gap={"20px"}
             m={"0px"}
           >
-            <Text fontSize={{base : "12px", sm : "14px"}} color={"gray"}>
-              Reason:{" "}
+            <Text fontSize={{ base: "12px", sm: "14px" }} color={"gray"}>
+              Type:{" "}
               <span style={{ fontWeight: "500", fontSize: "14px" }}>
-                Bussiness
+                {type}
               </span>
             </Text>
             <UnorderedList>
               <ListItem>
                 <Text fontSize={"15px"} color={"gray"}>
-                  Reason:{" "}
+                  Category:{" "}
                   <span style={{ fontWeight: "500", fontSize: "14px" }}>
-                    Bussiness
+                    {category}
                   </span>
                 </Text>
               </ListItem>
@@ -68,33 +87,33 @@ export default function Card() {
             gap={"20px"}
             m={"0px"}
           >
-            <Text fontSize={{base : "12px", sm : "14px"}} color={"gray"}>
-              Reason:{" "}
+            <Text fontSize={{ base: "12px", sm: "14px" }} color={"gray"}>
+              Div:{" "}
               <span style={{ fontWeight: "500", fontSize: "14px" }}>
-                Bussiness
+                {division}
               </span>
             </Text>
             <UnorderedList>
               <ListItem>
-                <Text fontSize={{base : "12px", sm : "14px"}} color={"gray"}>
-                  Reason:{" "}
+                <Text fontSize={{ base: "12px", sm: "14px" }} color={"gray"}>
+                  Dept:{" "}
                   <span style={{ fontWeight: "500", fontSize: "14px" }}>
-                    Bussiness
+                    {dept}
                   </span>
                 </Text>
               </ListItem>
             </UnorderedList>
           </Box>
-          <Text fontSize={{base : "12px", sm : "14px"}} color={"gray"}>
-            Reason:{" "}
+          <Text fontSize={{ base: "12px", sm: "14px" }} color={"gray"}>
+            Location:{" "}
             <span style={{ fontWeight: "500", fontSize: "14px" }}>
-              Bussiness
+              {location}
             </span>
           </Text>
-          <Text fontSize={{base : "12px", sm : "14px"}} color={"gray"}>
-            Reason:{" "}
+          <Text fontSize={{ base: "12px", sm: "14px" }} color={"gray"}>
+            Priority:{" "}
             <span style={{ fontWeight: "500", fontSize: "14px" }}>
-              Bussiness
+              {priority}
             </span>
           </Text>
         </Box>
@@ -104,6 +123,7 @@ export default function Card() {
             color={"white"}
             variant="solid"
             borderRadius={"20px"}
+            onClick={() => handleUpdate("Running", _id)}
           >
             Start
           </Button>
@@ -113,6 +133,7 @@ export default function Card() {
             color={"#1277D3"}
             variant="outline"
             borderRadius={"20px"}
+            onClick={() => handleUpdate("Closed", _id)}
           >
             Close
           </Button>
@@ -122,6 +143,7 @@ export default function Card() {
             color={"#1277D3"}
             variant="outline"
             borderRadius={"20px"}
+            onClick={() => handleUpdate("Cancelled", _id)}
           >
             Cancel
           </Button>

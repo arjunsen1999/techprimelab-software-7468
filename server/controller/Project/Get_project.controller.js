@@ -15,6 +15,7 @@ const Get_project_controller = async (req, res) => {
       ];
     }
     let project = Project_model.find(search_query);
+    const result = await Project_model.find(search_query).count();
 
     // Sort the data
     if (req.query.sort) {
@@ -29,7 +30,8 @@ const Get_project_controller = async (req, res) => {
     project = await project;
     const response = {
       status: "sucess",
-      result: 10,
+      result: result,
+      page: Math.ceil(result / limit),
       data: {
         project,
       },
