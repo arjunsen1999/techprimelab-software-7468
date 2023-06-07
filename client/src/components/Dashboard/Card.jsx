@@ -6,7 +6,6 @@ export default function Card({ number, title }) {
   return (
     <>
       <Box
-        w="280px"
         bg="white"
         minH="100px"
         borderRadius={"4px"}

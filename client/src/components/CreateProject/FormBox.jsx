@@ -139,7 +139,7 @@ export default function FormBox() {
             mb={{ base: "10px", md: "25px" }}
           >
             <Box>
-              <FormControl>
+              <FormControl isRequired>
                 <FormLabel fontSize={"15px"} color={"#9C9C9C"}>
                   Category
                 </FormLabel>

@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../components/Navbar/SideBar";
 import { Box, Heading } from "@chakra-ui/react";
 import Header from "../components/Header/Header";
 import BottomBar from "../components/Navbar/BottomBar";
 import Card from "../components/Dashboard/Card";
 import ChartBox from "../components/Dashboard/ChartBox";
+import axios from "axios";
+import StatusLoading from "../loading-page/dashboard/StatusLoading";
 
 export default function Dashboard() {
+  const [projectStatus, setProjectStatus] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const getProjectStatus = async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/project/status`
+      );
+      setProjectStatus(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    getProjectStatus();
+  }, []);
   return (
     <>
       <Box
@@ -25,22 +44,27 @@ export default function Dashboard() {
           {/* Start */}
           <Box px="25px" position={"relative"} zIndex={10} mt="110px" mb="20px">
             <Box>
-              <Box
-                mb="20px"
-                overflowX={"scroll"}
-                css={{
-                  "&::-webkit-scrollbar": {
-                    width: "0px",
-                  },
-                }}
-                display={"flex"}
-                gap={"30px"}
-              >
-                <Card number={8} title={"Total Projects"} />
-                <Card number={3} title={"Close"} />
-                <Card number={3} title={"Running"} />
-                <Card number={2} title={"Closure Delay"} />
-              </Box>
+              {isLoading ? (
+                <StatusLoading />
+              ) : (
+                <Box
+                  mb="20px"
+                  overflowX={"scroll"}
+                  css={{
+                    "&::-webkit-scrollbar": {
+                      width: "0px",
+                    },
+                  }}
+                  display={"grid"}
+                  gridTemplateColumns={"1fr 1fr 1fr 1fr 1fr"}
+                  gap={"30px"}
+                  minH="110px"
+                >
+                  {projectStatus?.map((ele, idx) => (
+                    <Card number={ele.count} title={ele.title} key={idx} />
+                  ))}
+                </Box>
+              )}
 
               <Box>
                 <Box mb="20px">

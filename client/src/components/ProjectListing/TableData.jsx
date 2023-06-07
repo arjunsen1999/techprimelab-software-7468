@@ -5,9 +5,10 @@ import TableList from "./TableList";
 import { get_project } from "../../redux/project/Project.action";
 import { useDispatch, useSelector } from "react-redux";
 import { project_reset } from "../../redux/project/Project.actionTypes";
+import LoadingPage from "../../loading-page/ProjectListing/LoadingPage";
 
 export default function TableData() {
-  const { project_data, isSuccess } = useSelector((state) => state.project);
+  const { project_data, isSuccess, project_isLoading } = useSelector((state) => state.project);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(get_project());
@@ -26,7 +27,8 @@ export default function TableData() {
         },
       }}
     >
-      <table className={style.container}>
+      {
+        project_isLoading?<LoadingPage /> :  <table className={style.container}>
         <thead>
           <tr>
             <th>Project Name</th>
@@ -42,11 +44,15 @@ export default function TableData() {
           </tr>
         </thead>
         <tbody>
+          
           {project_data?.map((ele) => {
             return <TableList {...ele} key={ele._id} />;
           })}
         </tbody>
       </table>
+      }
+      
+     
     </Box>
   );
 }

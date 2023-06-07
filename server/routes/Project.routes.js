@@ -6,10 +6,17 @@ const {
 const {
   Get_project_controller,
 } = require("../controller/Project/Get_project.controller");
+const {
+  Get_project_chart_controller,
+} = require("../controller/Project/Get_project_chart.controller");
 
 const {
   Update_status_controller,
 } = require("../controller/Project/Update_status.controller");
+
+const {
+  Get_project_status_controller,
+} = require("../controller/Project/Get_project_status.controller");
 
 projectRouter
   .route("/")
@@ -30,6 +37,8 @@ projectRouter
   )
   .get(Get_project_controller);
 projectRouter.route("/:id").patch(Update_status_controller);
+projectRouter.route("/chart").get(Get_project_chart_controller);
+projectRouter.route("/status").get(Get_project_status_controller);
 
 module.exports = {
   projectRouter,
