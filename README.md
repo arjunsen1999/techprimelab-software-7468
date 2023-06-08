@@ -59,6 +59,8 @@
 
 <h3>Customers can login using their input credentials which provided while signup.</h3>
 <br/>
+<p>Email :- arjunsen717@gmail.com</p>
+<p>Password :- Arjun</p>
 
 <table align="center">
   <tr>
