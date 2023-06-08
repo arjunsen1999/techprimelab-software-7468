@@ -1,11 +1,12 @@
-import { Box, Input, Select, Text, Textarea } from "@chakra-ui/react";
+import { Box, Button, Input, Select, Text, Textarea } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { create_project } from "../../redux/project/Project.action";
 
 export default function FormBox() {
   const dispatch = useDispatch();
+  const { project_isLoading, page } = useSelector((state) => state.project);
 
   const [formData, setFormData] = useState({
     project_name: "",
@@ -30,8 +31,7 @@ export default function FormBox() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData);
-    dispatch(create_project(formData))
+    dispatch(create_project(formData));
   };
   return (
     <>
@@ -56,16 +56,29 @@ export default function FormBox() {
               isRequired
             ></Textarea>
             <Box></Box>
-            <Input
-              type="submit"
-              bg="#035FB2"
-              w="150px"
-              value={"Save Project"}
-              color={"white"}
-              borderRadius={"23px"}
-              cursor={"pointer"}
-              display={{ base: "none", md: "block" }}
-            />
+            {project_isLoading ? (
+              <Button
+                isLoading
+                bg="#035FB2"
+                w="150px"
+                color={"white"}
+                borderRadius={"23px"}
+                cursor={"pointer"}
+                display={{ base: "none", md: "block" }}
+              >
+              </Button>
+            ) : (
+              <Input
+                type="submit"
+                bg="#035FB2"
+                w="150px"
+                value={"Save Project"}
+                color={"white"}
+                borderRadius={"23px"}
+                cursor={"pointer"}
+                display={{ base: "none", md: "block" }}
+              />
+            )}
           </Box>
           <Box
             display={"grid"}
@@ -279,16 +292,31 @@ export default function FormBox() {
             <Box display={{ sm: "none", md: "block" }}></Box>
           </Box>
           <Box>
-            <Input
-              type="submit"
-              bg="#035FB2"
-              w="100%"
-              value={"Save Project"}
-              color={"white"}
-              borderRadius={"23px"}
-              cursor={"pointer"}
-              display={{ base: "block", md: "none" }}
-            />
+            {project_isLoading ? (
+              <Button
+                isLoading
+                loadingText="Save Project"
+                bg="#035FB2"
+                w="100%"
+                color={"white"}
+                borderRadius={"23px"}
+                cursor={"pointer"}
+                display={{ base: "block", md: "none" }}
+              >
+                Save Project
+              </Button>
+            ) : (
+              <Input
+                type="submit"
+                bg="#035FB2"
+                w="100%"
+                value={"Save Project"}
+                color={"white"}
+                borderRadius={"23px"}
+                cursor={"pointer"}
+                display={{ base: "block", md: "none" }}
+              />
+            )}
           </Box>
         </form>
       </Box>
