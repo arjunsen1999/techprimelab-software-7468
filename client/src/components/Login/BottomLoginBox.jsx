@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import notification from "../../Toast";
 import { useDispatch, useSelector } from "react-redux";
 import { user_login_reset } from "../../redux/auth/Auth.actionTypes";
+import { login } from "../../redux/auth/Auth.action";
 
 export default function BottomLoginBox() {
   const { User_isLoading, isError, isSuccess, message } = useSelector(
@@ -76,7 +77,7 @@ export default function BottomLoginBox() {
         };
       });
     }
-
+    dispatch(login(formData));
     // navigate("/");
   };
   useEffect(() => {
@@ -158,7 +159,7 @@ export default function BottomLoginBox() {
                     isLoading
                     loadingText="Login"
                     bg="#035FB2"
-                    w="150px"
+                    w="100%"
                     color={"white"}
                     borderRadius={"23px"}
                     cursor={"pointer"}
