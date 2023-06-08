@@ -49,6 +49,7 @@ export default function Dashboard() {
               ) : (
                 <Box
                   mb="20px"
+                  position={"relative"}
                   overflowX={"scroll"}
                   css={{
                     "&::-webkit-scrollbar": {
@@ -56,7 +57,7 @@ export default function Dashboard() {
                     },
                   }}
                   display={"grid"}
-                  gridTemplateColumns={"1fr 1fr 1fr 1fr 1fr"}
+                  gridTemplateColumns={{base:"200px 200px 200px 200px 200px", md : "1fr 1fr 1fr 1fr 1fr"}}
                   gap={"30px"}
                   minH="110px"
                 >
@@ -75,7 +76,7 @@ export default function Dashboard() {
                 <Box>
                   <Box
                     bg="white"
-                    w="650px"
+                    w={{base : "100%", md : "650px"}}
                     borderRadius={"20px"}
                     minH={"350px"}
                     p="50px 20px 30px"

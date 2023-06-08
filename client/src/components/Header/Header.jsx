@@ -51,6 +51,13 @@ export default function Header({ heading, icone }) {
         >
           <Image src="./Logo.svg" w="60px" />
         </Box>
+         <Box  position={"absolute"}
+          top={"47%"}
+          right={"10px"}
+          transform={"translate(-50%,-50%)"}
+          display={{base:"block", md : "none"}}>
+            <Link to="/login"><Image src="./Logout.svg" w="35px" h="35px"/></Link>
+         </Box>
       </Box>
     </>
   );
