@@ -8,14 +8,14 @@ import { project_reset } from "../../redux/project/Project.actionTypes";
 import LoadingPage from "../../loading-page/ProjectListing/LoadingPage";
 
 export default function TableData() {
-  const { project_data, isSuccess, project_isLoading, search, page } = useSelector((state) => state.project);
+  const { project_data, isSuccess, project_isLoading, search, page, filter } = useSelector((state) => state.project);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(get_project(search, page));
+    dispatch(get_project(search, page, filter));
     if (isSuccess) {
       dispatch({ type: project_reset });
     }
-  }, [isSuccess, search, page]);
+  }, [isSuccess, search, page, filter]);
   return (
     <Box
       overflowX={"scroll"}

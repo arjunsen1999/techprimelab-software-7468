@@ -29,11 +29,11 @@ export const create_project = (formData) => async (dispatch) => {
 };
 
 // get all project data
-export const get_project = (search, page) => async (dispatch) => {
+export const get_project = (search, page, filter) => async (dispatch) => {
   dispatch({ type: project_isLoading, payload: true });
   try {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/project?search=${search}&page=${page}`
+      `${process.env.REACT_APP_API}/project?search=${search}&page=${page}&sort=${filter}`
     );
     dispatch({ type: project_get_data, payload: data.data.project });
     dispatch({type : project_total_page, payload : data.page})

@@ -18,9 +18,11 @@ const Get_project_controller = async (req, res) => {
     const result = await Project_model.find(search_query).count();
 
     // Sort the data
+    let sort = "";
     if (req.query.sort) {
-      project = project.sort(`-${req.query.sort}`);
+      sort += `-${req.query.sort}`
     }
+    project = project.sort(`-createdAt ${sort}`);
 
     // Pegination
     const limit = req.query.limit || 6;

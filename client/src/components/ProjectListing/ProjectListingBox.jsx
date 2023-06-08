@@ -11,7 +11,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import Card from "./Card";
 import SortDrawer from "./SortDrawer";
 import TableData from "./TableData";
-import { get_project, handleChange } from "../../redux/project/Project.action";
+import { get_project, handleChange, handleChangeFilter } from "../../redux/project/Project.action";
 import { useDispatch, useSelector } from "react-redux";
 import { project_reset } from "../../redux/project/Project.actionTypes";
 
@@ -74,9 +74,13 @@ export default function ProjectListingBox() {
               border={"none"}
               placeholder="Filter"
               fontSize={"18px"}
+              onChange={(event) => dispatch(handleChangeFilter(event.target.value)) }
             >
-              <option value="">Pjhas</option>
-              <option value="">jdsd</option>
+              <option value="reason">Reason</option>
+              <option value="category">Category</option>
+              <option value="status">Status</option>
+              <option value="location">Location</option>
+              <option value="project_name">Project Name</option>
             </Select>
           </Box>
           <Box display={{ base: "block", md: "none" }}>
