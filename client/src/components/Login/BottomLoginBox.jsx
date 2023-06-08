@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -151,7 +152,20 @@ export default function BottomLoginBox() {
               alignItems={"center"}
               justifyContent={"center"}
             >
-              <Input
+              {
+                User_isLoading ? (
+                  <Button
+                    isLoading
+                    loadingText="Login"
+                    bg="#035FB2"
+                    w="150px"
+                    color={"white"}
+                    borderRadius={"23px"}
+                    cursor={"pointer"}
+                  >
+                    Login
+                  </Button>
+                ) :  <Input
                 type="submit"
                 bg="#035FB2"
                 value={"Login"}
@@ -161,6 +175,8 @@ export default function BottomLoginBox() {
                 cursor={"pointer"}
                 onClick={handleSubmit}
               />
+              }
+             
             </Box>
           </form>
           {/* Form End */}

@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Input,
   InputGroup,
   InputRightElement,
@@ -79,14 +80,13 @@ export default function LoginBox() {
   };
   // console.log(process.env.REACT_APP_API)
   useEffect(() => {
-
     // For Success
     if (isSuccess) {
       navigate("/");
     }
 
     dispatch({ type: user_login_reset });
-  }, [ isSuccess]);
+  }, [isSuccess]);
   return (
     <>
       <Box
@@ -172,15 +172,29 @@ export default function LoginBox() {
                 alignItems={"center"}
                 justifyContent={"center"}
               >
-                <Input
-                  type="submit"
-                  bg="#035FB2"
-                  w="150px"
-                  value={"Login"}
-                  color={"white"}
-                  borderRadius={"23px"}
-                  cursor={"pointer"}
-                />
+                {User_isLoading ? (
+                  <Button
+                    isLoading
+                    loadingText="Login"
+                    bg="#035FB2"
+                    w="150px"
+                    color={"white"}
+                    borderRadius={"23px"}
+                    cursor={"pointer"}
+                  >
+                    Login
+                  </Button>
+                ) : (
+                  <Input
+                    type="submit"
+                    bg="#035FB2"
+                    w="150px"
+                    value={"Login"}
+                    color={"white"}
+                    borderRadius={"23px"}
+                    cursor={"pointer"}
+                  />
+                )}
               </Box>
             </form>
             {/* Form End */}
