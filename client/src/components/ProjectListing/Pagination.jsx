@@ -13,6 +13,10 @@ export default function Pagination() {
     setCurrentPage(selectedPage.selected);
   };
 
+  useEffect(() =>{
+    setCurrentPage(0)
+  }, [])
+
   useEffect(() => {
     dispatch(handlePage(currentPage + 1));
   }, [currentPage]);
