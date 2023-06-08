@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { create_project } from "../../redux/project/Project.action";
+import notification from "../../Toast";
 
 export default function FormBox() {
   const dispatch = useDispatch();
   const { project_isLoading, page } = useSelector((state) => state.project);
+
+
 
   const [formData, setFormData] = useState({
     project_name: "",
@@ -20,6 +23,40 @@ export default function FormBox() {
     start_date: "",
     end_date: "",
   });
+
+    /////////////////////////////////
+
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    let [selectedEndDate, setSelectedEndDate] = useState("");
+  
+    const handleStartDateChange = (event) => {
+      setStartDate(event.target.value);
+      setFormData((prev) =>{
+         return {
+          ...prev,
+          start_date : event.target.value
+         }
+      });
+    };
+  
+    const handleEndDateChange = (event) => {
+      selectedEndDate = event.target.value;
+      if (selectedEndDate > startDate) {
+        setEndDate(selectedEndDate);
+        setFormData((prev) =>{
+          return {
+           ...prev,
+           end_date : selectedEndDate
+          }
+       });
+      } else {
+        // Handle invalid end date
+        // alert("End date should be greater than start date");
+        notification("error", "End date should be greater than start date");
+      }
+    };
+    //////////////////////////////////
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => {
@@ -65,8 +102,7 @@ export default function FormBox() {
                 borderRadius={"23px"}
                 cursor={"pointer"}
                 display={{ base: "none", md: "block" }}
-              >
-              </Button>
+              ></Button>
             ) : (
               <Input
                 type="submit"
@@ -223,13 +259,21 @@ export default function FormBox() {
                 <FormLabel fontSize={"15px"} color={"#9C9C9C"}>
                   Start Date as per Project Plan
                 </FormLabel>
-                <Input
+                {/* <Input
                   type="date"
                   placeholder="D Month, Yr"
                   fontWeight={"500"}
                   color={"#454545"}
                   name="start_date"
                   onChange={handleChange}
+                /> */}
+                <Input
+                  placeholder="D Month, Yr"
+                  type="date"
+                  fontWeight={"500"}
+                  color={"#454545"}
+                  value={startDate}
+                  onChange={handleStartDateChange}
                 />
               </FormControl>
             </Box>
@@ -238,13 +282,22 @@ export default function FormBox() {
                 <FormLabel fontSize={"15px"} color={"#9C9C9C"}>
                   End Date as per Project Plan
                 </FormLabel>
-                <Input
+                {/* <Input
                   type="date"
                   placeholder="D Month, Yr"
                   fontWeight={"500"}
                   color={"#454545"}
                   name="end_date"
                   onChange={handleChange}
+                /> */}
+                <Input
+                  placeholder="D Month, Yr"
+                  fontWeight={"500"}
+                  color={"#454545"}
+                  type="date"
+                  value={endDate}
+                  onChange={handleEndDateChange}
+                  // disabled={() => selectedEndDate < startDate}
                 />
               </FormControl>
             </Box>

@@ -15,6 +15,7 @@ import notification from "../../Toast";
 // post project
 export const create_project = (formData) => async (dispatch) => {
   dispatch({ type: project_isLoading, payload: true });
+  console.log(formData)
   try {
     const { data } = await axios.post(
       `${process.env.REACT_APP_API}/project`,
