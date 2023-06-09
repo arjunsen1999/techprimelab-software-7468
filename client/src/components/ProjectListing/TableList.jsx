@@ -22,13 +22,33 @@ export default function TableList({
   const handleUpdate = (status, id) => {
     dispatch(update_status(status, id));
   };
+  // Start_date
+  const convert_start_date = new Date(start_date);
+  const start_year = convert_start_date.getFullYear();
+  const start_month = String(convert_start_date.getMonth() + 1).padStart(
+    2,
+    "0"
+  );
+  const start_day = String(convert_start_date.getDate()).padStart(2, "0");
+  const start_date_format = `${start_year}-${start_month}-${start_day}`;
+  // Start_date
+  // End_date
+  const convert_end_date = new Date(end_date);
+  const end_year = convert_end_date.getFullYear();
+  const end_month = String(convert_end_date.getMonth() + 1).padStart(
+    2,
+    "0"
+  );
+  const end_day = String(convert_end_date.getDate()).padStart(2, "0");
+  const end_date_format = `${end_year}-${end_month}-${end_day}`;
+   // End_date
   return (
     <>
       <tr className={style.tbodyTr}>
         <td>
           <p>{project_name}</p>
           <p>
-            {start_date} to {end_date}
+            {start_date_format} to {end_date_format}
           </p>
         </td>
         <td>{reason}</td>
