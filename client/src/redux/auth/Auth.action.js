@@ -21,7 +21,7 @@ export const login = (user_login_data) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: user_login_isLoading, payload: false });
-    notification("error", error.response.data.error)
-    dispatch({ type: user_login_isError, payload: error.response.data.error });
+    notification("error", error.response.data.message)
+    dispatch({ type: user_login_isError, payload: error.response.data.message });
   }
 };
