@@ -42,7 +42,7 @@ export default function LoginBox() {
       };
     });
 
-    if (formData.email != "") {
+    if(name == "email"){
       setFormError((prev) => {
         return {
           ...prev,
@@ -50,7 +50,8 @@ export default function LoginBox() {
         };
       });
     }
-    if (formData.password != "") {
+
+    if(name == "password"){
       setFormError((prev) => {
         return {
           ...prev,
