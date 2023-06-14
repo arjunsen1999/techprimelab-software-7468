@@ -7,7 +7,10 @@ export default function Card({ number, title }) {
     <>
       <Box
         bg="white"
+        w="220px"
         minH="100px"
+        marginRight={"40px"}
+        display={"inline-block"}
         borderRadius={"4px"}
         p="10px 20px"
         boxShadow={"#F3F5F7 0px 13px 8px -5px, #F3F5F7 0px 8px 8px -8px"}

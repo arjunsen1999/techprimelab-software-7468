@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "../components/Navbar/SideBar";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Header from "../components/Header/Header";
 import BottomBar from "../components/Navbar/BottomBar";
 import Card from "../components/Dashboard/Card";
@@ -48,22 +48,31 @@ export default function Dashboard() {
                 <StatusLoading />
               ) : (
                 <Box
+                  w={{ base: "350px", md: "100%" }}
                   mb="20px"
-                  position={"relative"}
-                  overflowX={"scroll"}
+                  overflowX={"auto"}
+                  whiteSpace={"nowrap"}
                   css={{
                     "&::-webkit-scrollbar": {
                       width: "0px",
                     },
                   }}
-                  display={"grid"}
-                  gridTemplateColumns={{base:"200px 200px 200px 200px 200px", md : "1fr 1fr 1fr 1fr 1fr"}}
-                  gap={"30px"}
-                  minH="110px"
+                  // display={"grid"}
+                  // gridTemplateColumns={{base:"200px 200px 200px 200px 200px", md : "1fr 1fr 1fr 1fr 1fr"}}
+                  // gap={"30px"}
+                  // minH="110px"
                 >
-                  {projectStatus?.map((ele, idx) => (
-                    <Card number={ele.count} title={ele.title} key={idx} />
-                  ))}
+                  <Flex
+                    w={{ base: "350px", md: "100%" }}
+                    position={"relative"}
+                    display={"inline-block"}
+                    // gap={"30px"}
+                    // border={"1px solid red"}
+                  >
+                    {projectStatus?.map((ele, idx) => (
+                      <Card number={ele.count} title={ele.title} key={idx} />
+                    ))}
+                  </Flex>
                 </Box>
               )}
 
@@ -76,7 +85,7 @@ export default function Dashboard() {
                 <Box>
                   <Box
                     bg="white"
-                    w={{base : "100%", md : "650px"}}
+                    w={{ base: "100%", md: "650px" }}
                     borderRadius={"20px"}
                     minH={"350px"}
                     p="50px 20px 30px"
