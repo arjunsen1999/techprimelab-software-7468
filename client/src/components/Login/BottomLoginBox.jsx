@@ -23,6 +23,7 @@ export default function BottomLoginBox() {
     (state) => state.auth
   );
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -42,9 +43,33 @@ export default function BottomLoginBox() {
         [name]: value,
       };
     });
+    if(name == "email"){
+      setFormError((prev) => {
+        return {
+          ...prev,
+          email: false,
+        };
+      });
+    }
+
+    if(name == "password"){
+      setFormError((prev) => {
+        return {
+          ...prev,
+          password: false,
+        };
+      });
+    }
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (formData.email == "" && formData.password == "") {
+      setFormError((prev) => {
+        return { ...prev, email: true, password: true };
+      });
+      return;
+    }
+
     if (formData.email === "") {
       setFormError((prev) => {
         return {
@@ -86,12 +111,16 @@ export default function BottomLoginBox() {
       navigate("/");
     }
 
+    if (isError) {
+      setError(message);
+    }
+
     dispatch({ type: user_login_reset });
-  }, [isSuccess]);
+  }, [isSuccess, isError]);
   return (
     <>
       <Box w="100%" mt="40px" px="20px" display={{ base: "block", sm: "none" }}>
-        <Box>
+        <Box mb={"40px"}>
           {/* Heading start */}
           <Box mb="40px">
             <Text
@@ -123,7 +152,7 @@ export default function BottomLoginBox() {
             </Box>
 
             <Box mb="5px">
-              <FormControl>
+              <FormControl isInvalid={formError.password}>
                 <FormLabel fontSize={"15px"} color={"#9C9C9C"}>
                   Password
                 </FormLabel>
@@ -153,34 +182,38 @@ export default function BottomLoginBox() {
               alignItems={"center"}
               justifyContent={"center"}
             >
-              {
-                User_isLoading ? (
-                  <Button
-                    isLoading
-                    loadingText="Login"
-                    bg="#035FB2"
-                    w="100%"
-                    color={"white"}
-                    borderRadius={"23px"}
-                    cursor={"pointer"}
-                  >
-                    Login
-                  </Button>
-                ) :  <Input
-                type="submit"
-                bg="#035FB2"
-                value={"Login"}
-                w="100%"
-                color={"white"}
-                borderRadius={"23px"}
-                cursor={"pointer"}
-                onClick={handleSubmit}
-              />
-              }
-             
+              {User_isLoading ? (
+                <Button
+                  isLoading
+                  loadingText="Login"
+                  bg="#035FB2"
+                  w="100%"
+                  color={"white"}
+                  borderRadius={"23px"}
+                  cursor={"pointer"}
+                >
+                  Login
+                </Button>
+              ) : (
+                <Input
+                  type="submit"
+                  bg="#035FB2"
+                  value={"Login"}
+                  w="100%"
+                  color={"white"}
+                  borderRadius={"23px"}
+                  cursor={"pointer"}
+                  onClick={handleSubmit}
+                />
+              )}
             </Box>
           </form>
           {/* Form End */}
+        </Box>
+        <Box mb="30px">
+          <Text color={"red"} textAlign={"center"}>
+            {error}
+          </Text>
         </Box>
       </Box>
     </>
