@@ -28,6 +28,7 @@ export default function LoginBox() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("")
   const [formError, setFormError] = useState({
     email: false,
     password: false,
@@ -40,9 +41,33 @@ export default function LoginBox() {
         [name]: value,
       };
     });
+
+    if (formData.email != "") {
+      setFormError((prev) => {
+        return {
+          ...prev,
+          email: false,
+        };
+      });
+    }
+    if (formData.password != "") {
+      setFormError((prev) => {
+        return {
+          ...prev,
+          password: false,
+        };
+      });
+    }
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (formData.email == "" && formData.password == "") {
+      setFormError((prev) => {
+        return { ...prev, email: true, password: true };
+      });
+      return;
+    }
+
     if (formData.email === "") {
       setFormError((prev) => {
         return {
@@ -85,8 +110,12 @@ export default function LoginBox() {
       navigate("/");
     }
 
+    if(isError){
+      setError(message);
+    }
+
     dispatch({ type: user_login_reset });
-  }, [isSuccess]);
+  }, [isSuccess, isError]);
   return (
     <>
       <Box
@@ -106,6 +135,7 @@ export default function LoginBox() {
           minH={"100px"}
           borderRadius={"12px"}
           boxShadow={"#F3F5F7 0px 13px 8px -5px, #F3F5F7 0px 8px 8px -8px"}
+          position={"relative"}
         >
           <Box>
             {/* Heading start */}
@@ -198,6 +228,9 @@ export default function LoginBox() {
               </Box>
             </form>
             {/* Form End */}
+          </Box>
+          <Box position={"absolute"} left={"0px"} bottom={"-80px"} w="100%">
+            <Text textAlign={"center"} color={"red"}>{error}</Text>
           </Box>
         </Box>
       </Box>
